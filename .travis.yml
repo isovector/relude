@@ -4,7 +4,7 @@ language: haskell
 git:
   depth: 5
 
-cabal: "2.0"
+cabal: "2.4"
 
 cache:
   directories:
@@ -16,12 +16,11 @@ matrix:
   include:
 
   # Cabal
-  - ghc: 8.0.2
   - ghc: 8.2.2
   - ghc: 8.4.4
   - ghc: 8.6.3
 
-  # stack
+  # Stack
   - ghc: 8.6.3
     env: STACK_YAML="$TRAVIS_BUILD_DIR/stack.yaml"
 
@@ -44,8 +43,7 @@ install:
 script:
   - |
     if [ -z "$STACK_YAML" ]; then
-      cabal new-test
-      cabal new-haddock
+      cabal new-test --enable-tests
     else
       stack test --system-ghc
     fi
